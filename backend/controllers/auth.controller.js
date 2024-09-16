@@ -90,7 +90,29 @@ export async function signup(req, res) {
   }
 }
 export const login = async (req, res) => {
-  res.send('login');
+  try {
+    const { email, password } = req.body;
+    const user = await User.findOne({ email: email });
+    if (user && (await user.comparePassword(password))) {
+      const { accessToken, refreshToken } = generateTokens(user._id);
+
+      await storeRefreshToken(user._id, refreshToken);
+      setCookies(res, accessToken, refreshToken);
+
+      res.status(201).json({
+        _id: user._id,
+        name: user.name,
+        email: user.email,
+        role: user.role,
+      });
+    } else {
+      res.status(401).json({ message: 'Invalid email or password !' });
+    }
+  } catch (error) {
+    console.log('Error in login controller : ' + error.message);
+
+    res.status(500).json({ message: 'Login failed', error: error.message });
+  }
 };
 export const logout = async (req, res) => {
   try {
@@ -107,6 +129,7 @@ export const logout = async (req, res) => {
     res.clearCookie('refreshToken');
     res.json({ message: 'Logged out successfully' });
   } catch (error) {
+    console.log('Error in logout controller : ' + error.message);
     res.status(500).json({ message: 'Server error ', error: error.message });
   }
 };
