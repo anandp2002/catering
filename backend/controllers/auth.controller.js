@@ -1,3 +1,4 @@
+import { request } from 'express';
 import { redis } from '../lib/redis.js';
 import User from '../models/user.model.js';
 import jwt from 'jsonwebtoken';
@@ -12,9 +13,9 @@ const generateTokens = (userId) => {
   return { accessToken, refreshToken };
 };
 
-const storeRefreshToken = async (refreshToken, userId) => {
+const storeRefreshToken = async (userId, refreshToken) => {
   await redis.set(
-    `refresh_token : ${userId}`,
+    `refresh_token:${userId}`,
     refreshToken,
     'EX',
     7 * 24 * 60 * 60 //7 days
@@ -22,13 +23,13 @@ const storeRefreshToken = async (refreshToken, userId) => {
 };
 
 const setCookies = (res, accessToken, refreshToken) => {
-  res.cookie('access-token', accessToken, {
+  res.cookie('accessToken', accessToken, {
     httpOnly: true, //prevent XSS attacks
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict', //prevents CSRF attacks(cross site request forgery)
     maxAge: 15 * 60 * 1000,
   });
-  res.cookie('refresh-token', refreshToken, {
+  res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
@@ -92,5 +93,20 @@ export const login = async (req, res) => {
   res.send('login');
 };
 export const logout = async (req, res) => {
-  res.send('logout');
+  try {
+    const refreshToken = req.cookies.refreshToken;
+    if (refreshToken) {
+      const decoded = jwt.verify(
+        refreshToken,
+        process.env.REFRESH_TOKEN_SECRET
+      );
+
+      await redis.del(`refresh_token:${decoded.userId}`);
+    }
+    res.clearCookie('accessToken');
+    res.clearCookie('refreshToken');
+    res.json({ message: 'Logged out successfully' });
+  } catch (error) {
+    res.status(500).json({ message: 'Server error ', error: error.message });
+  }
 };
