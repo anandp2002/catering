@@ -27,13 +27,13 @@ const setCookies = (res, accessToken, refreshToken) => {
     httpOnly: true, //prevent XSS attacks
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict', //prevents CSRF attacks(cross site request forgery)
-    maxAge: 15 * 60 * 1000,
+    maxAge: 15 * 60 * 1000, //15 minutes
   });
   res.cookie('refreshToken', refreshToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === 'production',
     sameSite: 'strict',
-    maxAge: 7 * 24 * 60 * 60 * 1000,
+    maxAge: 7 * 24 * 60 * 60 * 1000, //7 days
   });
 };
 
@@ -89,6 +89,7 @@ export async function signup(req, res) {
     res.status(500).json({ success: false, message: error.message });
   }
 }
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -114,6 +115,8 @@ export const login = async (req, res) => {
     res.status(500).json({ message: 'Login failed', error: error.message });
   }
 };
+
+// this will logout the user
 export const logout = async (req, res) => {
   try {
     const refreshToken = req.cookies.refreshToken;
