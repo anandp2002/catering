@@ -2,7 +2,7 @@ import { ShoppingCart, UserPlus, LogIn, LogOut, Lock } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 const Navbar = () => {
-  const user = true;
+  const user = false;
   const cart = [1, 2, 3];
   const isAdmin = false;
   return (
@@ -11,7 +11,7 @@ const Navbar = () => {
         <div className="flex flex-wrap justify-between items-center">
           <Link
             to="/"
-            className="text-2xl font-bold text-emerald-400 items-center space-x-2 flex"
+            className="text-2xl font-bold text-white items-center space-x-2 flex"
           >
             E-Commerce
           </Link>
