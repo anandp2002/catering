@@ -17,7 +17,7 @@ const SignUpPage = () => {
     console.log(formData);
   };
   return (
-    <div className="flex flex-col justify-center mx-14 sm:mx-0 sm:px-6 lg:px-8">
+    <div className="flex flex-col justify-center mx-6 mt-20 sm:mt-0 sm:mx-0 sm:px-6 lg:px-8">
       <motion.div
         className="sm:mx-auto sm:w-full sm:max-w-md"
         initial={{ opacity: 0, y: -20 }}
@@ -35,7 +35,7 @@ const SignUpPage = () => {
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.2 }}
       >
-        <div className="bg-gray-800 py-8 px-4 shadow sm:rounded-lg sm:px-10">
+        <div className="bg-gray-800 py-8 px-4 shadow rounded-lg sm:px-10">
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
               <label
@@ -172,7 +172,7 @@ const SignUpPage = () => {
           </form>
 
           <p className="mt-8 text-center text-sm text-gray-400">
-            Already have an account?{' '}
+            Already have an account ?{' '}
             <Link
               to="/login"
               className="font-medium text-emerald-400 hover:text-emerald-300"
