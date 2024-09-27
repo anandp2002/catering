@@ -21,7 +21,7 @@ const Navbar = () => {
         <div className="flex flex-wrap justify-between items-center">
           <Link
             to="/"
-            className="text-2xl font-bold text-white items-center space-x-2 flex"
+            className="text-2xl font-bold text-emerald-500 items-center space-x-2 flex"
           >
             E-Commerce
           </Link>

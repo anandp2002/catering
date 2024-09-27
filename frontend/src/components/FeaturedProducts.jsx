@@ -1,12 +1,15 @@
 import { useEffect, useState } from 'react';
 import { ShoppingCart, ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCartStore } from '../stores/useCartStore';
+import { useUserStore } from '../stores/useUserStore';
+import toast from 'react-hot-toast';
 
 const FeaturedProducts = ({ featuredProducts }) => {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [itemsPerPage, setItemsPerPage] = useState(4);
 
   const { addToCart } = useCartStore();
+  const { user } = useUserStore();
 
   useEffect(() => {
     const handleResize = () => {
@@ -32,11 +35,21 @@ const FeaturedProducts = ({ featuredProducts }) => {
   const isStartDisabled = currentIndex === 0;
   const isEndDisabled = currentIndex >= featuredProducts.length - itemsPerPage;
 
+  const handleAddToCart = (product) => {
+    if (!user) {
+      toast.error('Please login to add products to cart', { id: 'login' });
+      return;
+    } else {
+      // add to cart
+      addToCart(product);
+    }
+  };
+
   return (
     <div className="py-12">
       <div className="container mx-auto px-4">
-        <h2 className="text-center text-5xl sm:text-6xl font-bold text-emerald-400 mb-4">
-          Featured
+        <h2 className="text-center text-4xl sm:text-5xl font-bold text-emerald-400 mb-6">
+          Featured Products
         </h2>
         <div className="relative">
           <div className="overflow-hidden">
@@ -69,7 +82,7 @@ const FeaturedProducts = ({ featuredProducts }) => {
                         ${product.price.toFixed(2)}
                       </p>
                       <button
-                        onClick={() => addToCart(product)}
+                        onClick={() => handleAddToCart(product)}
                         className="w-full bg-emerald-600 hover:bg-emerald-500 text-white font-semibold py-2 px-4 rounded transition-colors duration-300 
 												flex items-center justify-center"
                       >

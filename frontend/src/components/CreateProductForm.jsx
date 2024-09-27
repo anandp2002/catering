@@ -22,6 +22,7 @@ const CreateProductForm = () => {
     image: '',
   });
 
+  const [imageName, setImageName] = useState(''); // Separate state for the image name
   const { createProduct, loading } = useProductStore();
 
   const handleSubmit = async (e) => {
@@ -35,6 +36,7 @@ const CreateProductForm = () => {
         category: '',
         image: '',
       });
+      setImageName(''); // Reset the image name state
     } catch {
       console.log('error creating a product');
     }
@@ -46,7 +48,11 @@ const CreateProductForm = () => {
       const reader = new FileReader();
 
       reader.onloadend = () => {
-        setNewProduct({ ...newProduct, image: reader.result });
+        setNewProduct((prevProduct) => ({
+          ...prevProduct,
+          image: reader.result,
+        }));
+        setImageName(file.name); // Set the image name
       };
 
       reader.readAsDataURL(file); // base64
@@ -81,8 +87,8 @@ const CreateProductForm = () => {
               setNewProduct({ ...newProduct, name: e.target.value })
             }
             className="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm py-2
-						 px-3 text-white focus:outline-none focus:ring-2
-						focus:ring-emerald-500 focus:border-emerald-500"
+              px-3 text-white focus:outline-none focus:ring-2
+            focus:ring-emerald-500 focus:border-emerald-500"
             required
           />
         </div>
@@ -103,8 +109,8 @@ const CreateProductForm = () => {
             }
             rows="3"
             className="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm
-						 py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 
-						 focus:border-emerald-500"
+              py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500 
+              focus:border-emerald-500"
             required
           />
         </div>
@@ -126,8 +132,8 @@ const CreateProductForm = () => {
             }
             step="0.01"
             className="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md shadow-sm 
-						py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500
-						 focus:border-emerald-500"
+            py-2 px-3 text-white focus:outline-none focus:ring-2 focus:ring-emerald-500
+             focus:border-emerald-500"
             required
           />
         </div>
@@ -147,8 +153,8 @@ const CreateProductForm = () => {
               setNewProduct({ ...newProduct, category: e.target.value })
             }
             className="mt-1 block w-full bg-gray-700 border border-gray-600 rounded-md
-						 shadow-sm py-2 px-3 text-white focus:outline-none 
-						 focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
+              shadow-sm py-2 px-3 text-white focus:outline-none 
+              focus:ring-2 focus:ring-emerald-500 focus:border-emerald-500"
             required
           >
             <option value="">Select a category</option>
@@ -175,18 +181,16 @@ const CreateProductForm = () => {
             <Upload className="h-5 w-5 inline-block mr-2" />
             Upload Image
           </label>
-          {newProduct.image && (
-            <span className="ml-3 text-sm text-gray-400">
-              Image uploaded ✅
-            </span>
+          {imageName && (
+            <span className="ml-3 text-sm text-gray-400">{imageName} ✅</span>
           )}
         </div>
 
         <button
           type="submit"
           className="w-full flex justify-center py-2 px-4 border border-transparent rounded-md 
-					shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 
-					focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50"
+          shadow-sm text-sm font-medium text-white bg-emerald-600 hover:bg-emerald-700 
+          focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-emerald-500 disabled:opacity-50"
           disabled={loading}
         >
           {loading ? (
