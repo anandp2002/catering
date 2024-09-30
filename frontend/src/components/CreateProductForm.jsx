@@ -182,7 +182,7 @@ const CreateProductForm = () => {
             Upload Image
           </label>
           {imageName && (
-            <span className="ml-3 text-sm text-gray-400">{imageName} ✅</span>
+            <span className="ml-3 text-sm text-gray-400">{imageName}</span>
           )}
         </div>
 

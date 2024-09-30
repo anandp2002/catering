@@ -5,7 +5,7 @@ import { useCartStore } from '../stores/useCartStore';
 
 const ProductCard = ({ product }) => {
   const { user } = useUserStore();
-  const { addToCart, cart } = useCartStore();
+  const { addToCart } = useCartStore();
   const handleAddToCart = () => {
     if (!user) {
       toast.error('Please login to add products to cart', { id: 'login' });
@@ -13,13 +13,12 @@ const ProductCard = ({ product }) => {
     } else {
       // add to cart
       addToCart(product);
-      console.log('current cart items ', cart);
     }
   };
 
   return (
     <div className="flex w-full relative flex-col overflow-hidden rounded-lg border border-gray-700 shadow-lg">
-      <div className="relative mx-3 mt-3 flex h-70 overflow-hidden rounded-xl">
+      <div className="relative mx-3 mt-3 flex h-72 overflow-hidden rounded-xl">
         <img
           className="object-cover w-full"
           src={product.image}

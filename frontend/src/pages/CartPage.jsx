@@ -6,12 +6,19 @@ import CartItem from '../components/CartItem';
 import PeopleAlsoBought from '../components/PeopleAlsoBought';
 import OrderSummary from '../components/OrderSummary';
 import GiftCouponCard from '../components/GiftCouponCard';
+import { useEffect } from 'react';
 
 const CartPage = () => {
   const { cart } = useCartStore();
 
+  useEffect(() => {
+    // Scroll to the top of the component
+    window.scrollTo(0, 0);
+  }, []);
+
   return (
-    <div className="py-8 md:py-16">
+    <div className="py-4">
+      <h1 className="text-2xl ml-4 sm:ml-14 font-bold">Your cart items</h1>
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
           <motion.div
@@ -39,8 +46,8 @@ const CartPage = () => {
               animate={{ opacity: 1, x: 0 }}
               transition={{ duration: 0.5, delay: 0.4 }}
             >
-              <OrderSummary />
               <GiftCouponCard />
+              <OrderSummary />
             </motion.div>
           )}
         </div>
