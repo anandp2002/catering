@@ -1,4 +1,4 @@
-![image](https://github.com/user-attachments/assets/375f8398-915c-4b7f-9aa1-b8c04bc7e6dc)
+![image](https://github.com/user-attachments/assets/cad844c2-e8f2-4f74-8a46-cba34a6ee1c4)
 
 🗄️ MongoDB & Redis Integration
 💳 Stripe Payment Setup
