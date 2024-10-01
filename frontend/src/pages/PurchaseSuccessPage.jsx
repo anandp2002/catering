@@ -1,4 +1,4 @@
-import { ArrowRight, CheckCircle, HandHeart } from 'lucide-react';
+import { ArrowRight, CheckCircle, HandHeart, Loader } from 'lucide-react';
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCartStore } from '../stores/useCartStore';
@@ -35,12 +35,21 @@ const PurchaseSuccessPage = () => {
     }
   }, [clearCart]);
 
-  if (isProcessing) return 'Processing...';
+  if (isProcessing)
+    return (
+      <div className="h-screen flex items-center justify-center -mt-10">
+        <Loader
+          className="h-6 w-6 animate-spin"
+          aria-hidden="true"
+          color="green"
+        />
+      </div>
+    );
 
   if (error) return `Error: ${error}`;
 
   return (
-    <div className="h-screen flex items-center justify-center px-4">
+    <div className="h-screen flex items-center justify-center px-4 -mt-12">
       <Confetti
         width={window.innerWidth}
         height={window.innerHeight}
