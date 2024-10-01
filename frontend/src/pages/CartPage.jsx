@@ -18,7 +18,9 @@ const CartPage = () => {
 
   return (
     <div className="py-4">
-      <h1 className="text-2xl ml-4 sm:ml-14 font-bold">Your cart items</h1>
+      {cart.length > 0 && (
+        <h1 className="text-2xl ml-4 sm:ml-14 font-bold">Your cart items</h1>
+      )}
       <div className="mx-auto max-w-screen-xl px-4 2xl:px-0">
         <div className="mt-6 sm:mt-8 md:gap-6 lg:flex lg:items-start xl:gap-8">
           <motion.div
