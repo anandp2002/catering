@@ -6,13 +6,13 @@ import Navbar from './components/Navbar';
 import { Toaster } from 'react-hot-toast';
 import { useUserStore } from './stores/useUserStore';
 import { useEffect } from 'react';
-import LoadingSpinner from './components/LoadingSpinner';
 import AdminPage from './pages/AdminPage';
 import CategoryPage from './pages/CategoryPage';
 import CartPage from './pages/CartPage';
 import { useCartStore } from './stores/useCartStore';
 import PurchaseSuccessPage from './pages/PurchaseSuccessPage';
 import PurchaseCancelPage from './pages/PurchaseCancelPage';
+import { Loader } from 'lucide-react';
 
 function App() {
   const { user, checkAuth, checkingAuth } = useUserStore();
@@ -27,7 +27,16 @@ function App() {
     if (user) getCartItems();
   }, [getCartItems, user]);
 
-  if (checkingAuth) return <LoadingSpinner />;
+  if (checkingAuth)
+    return (
+      <div className="h-screen flex items-center justify-center  bg-gray-900">
+        <Loader
+          className="h-6 w-6 animate-spin"
+          aria-hidden="true"
+          color="#50C878"
+        />
+      </div>
+    );
   return (
     <div className="min-h-screen bg-gray-900 text-white relative overflow-hidden">
       {/* Background gradient */}

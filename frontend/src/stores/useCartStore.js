@@ -50,7 +50,6 @@ export const useCartStore = create((set, get) => ({
     try {
       await axios.post('/cart', { productId: product._id });
       toast.success('Product added to cart');
-      console.log(product);
 
       set((prevState) => {
         const existingItem = prevState.cart.find(
@@ -65,7 +64,6 @@ export const useCartStore = create((set, get) => ({
           : [...prevState.cart, { ...product, quantity: 1 }];
         return { cart: newCart };
       });
-
       get().calculateTotals();
     } catch (error) {
       toast.error(error.response.data.message || 'An error occurred');
@@ -84,13 +82,13 @@ export const useCartStore = create((set, get) => ({
       return;
     }
 
+    await axios.put(`/cart/${productId}`, { quantity });
     set((prevState) => ({
       cart: prevState.cart.map((item) =>
         item._id === productId ? { ...item, quantity } : item
       ),
     }));
     get().calculateTotals();
-    await axios.put(`/cart/${productId}`, { quantity });
   },
   calculateTotals: () => {
     const { cart, coupon } = get();

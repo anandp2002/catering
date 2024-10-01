@@ -37,11 +37,11 @@ const PurchaseSuccessPage = () => {
 
   if (isProcessing)
     return (
-      <div className="h-screen flex items-center justify-center -mt-10">
+      <div className="h-screen flex items-center justify-center -mt-16">
         <Loader
           className="h-6 w-6 animate-spin"
           aria-hidden="true"
-          color="green"
+          color="#50C878"
         />
       </div>
     );
@@ -78,7 +78,7 @@ const PurchaseSuccessPage = () => {
             <div className="flex items-center justify-between mb-2">
               <span className="text-sm text-gray-400">Order number</span>
               <span className="text-sm font-semibold text-emerald-400">
-                #12345
+                #58294
               </span>
             </div>
             <div className="flex items-center justify-between">
