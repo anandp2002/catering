@@ -4,13 +4,29 @@ import { useProductStore } from '../stores/useProductStore';
 import FeaturedProducts from '../components/FeaturedProducts';
 
 const categories = [
-  { href: '/jeans', name: 'Jeans', imageUrl: '/jeans.jpg' },
-  { href: '/t-shirts', name: 'T-shirts', imageUrl: '/tshirts.jpg' },
-  { href: '/shoes', name: 'Shoes', imageUrl: '/shoes.jpg' },
-  { href: '/glasses', name: 'Glasses', imageUrl: '/glasses.png' },
-  { href: '/jackets', name: 'Jackets', imageUrl: '/jackets.jpg' },
-  { href: '/suits', name: 'Suits', imageUrl: '/suits.jpg' },
-  { href: '/bags', name: 'Bags', imageUrl: '/bags.jpg' },
+  {
+    href: '/main-Courses',
+    name: 'Main Courses',
+    imageUrl: '/main-Courses.jpg',
+  },
+  {
+    href: '/breads-and-Rice',
+    name: 'Breads and Rice',
+    imageUrl: '/breads-and-Rice.jpeg',
+  },
+  { href: '/desserts', name: 'Desserts', imageUrl: '/Desserts.jpg' },
+  { href: '/beverages', name: 'Beverages', imageUrl: '/Beverages.jpg' },
+  { href: '/appetizers', name: 'Appetizers', imageUrl: '/Appetizers.jpg' },
+  {
+    href: '/snacks-and-Finger-Foods',
+    name: 'Snacks and Finger Foods',
+    imageUrl: '/snacks-and-Finger-Foods.jpg',
+  },
+  {
+    href: '/chaat-and-Street-Food',
+    name: 'Chaat and Street Food',
+    imageUrl: '/chaat-and-Street-Food.jpg',
+  },
 ];
 
 const HomePage = () => {
@@ -27,7 +43,8 @@ const HomePage = () => {
           Explore Our Categories
         </h1>
         <p className="text-center text-xl text-gray-300 mb-12">
-          Discover the latest trends in eco-friendly fashion
+          Serving Sustainability : Discover the Latest Trends in Eco-Friendly
+          Catering
         </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">

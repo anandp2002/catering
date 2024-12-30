@@ -23,7 +23,7 @@ const Navbar = () => {
             to="/"
             className="text-2xl font-bold text-emerald-500 items-center space-x-2 flex"
           >
-            E-Commerce
+            Catering
           </Link>
           <nav className="flex flex-wrap items-center gap-4 py-1 sm:py-0">
             {user && (
