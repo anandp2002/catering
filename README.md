@@ -1,11 +1,8 @@
-![image](https://github.com/user-attachments/assets/cad844c2-e8f2-4f74-8a46-cba34a6ee1c4)
-
     🗄️ MongoDB & Redis Integration
     💳 Stripe Payment Setup
     🔐 Robust Authentication System
     🔑 JWT with Refresh/Access Tokens
     📝 User Signup & Login
-    🛒 E-Commerce Core
     📦 Product & Category Management
     🛍️ Shopping Cart Functionality
     💰 Checkout with Stripe
@@ -36,8 +33,8 @@
     NODE_ENV=development
 
 # Run this app locally
-    1. git clone https://github.com/anandp2002/e-commerce.git
-    2. cd e-commerce
+    1. git clone https://github.com/anandp2002/catering.git
+    2. cd catering
     3. create and configure .env file
     4. npm run build
     5. npm start
